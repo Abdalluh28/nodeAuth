@@ -38,7 +38,7 @@ const register = async (req, res) => {
 
     res.cookie('jwt', refreshToken, {
         httpOnly: true, // for security reasons (accessible only by web server)
-        secure: false, // for security reasons (https) in production not development
+        secure: process.env.NODE_ENV === 'production', // for security reasons (https) in production not development
         sameSite: 'None', // this cookie is sent to all the domains
         maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     })
@@ -86,7 +86,7 @@ const login = async (req, res) => {
 
     res.cookie('jwt', refreshToken, {
         httpOnly: true, // for security reasons (accessible only by web server)
-        secure: false, // for security reasons (https) in production not development
+        secure: process.env.NODE_ENV === 'production', // for security reasons (https) in production not development
         sameSite: 'None', // this cookie is sent to all the domains
         maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     })
@@ -139,7 +139,7 @@ const logout = (req, res) => {
 
     res.clearCookie('jwt', {
         httpOnly: true, // for security reasons (accessible only by web server)
-        secure: false, // for security reasons (https) in production not development
+        secure: process.env.NODE_ENV === 'production', // for security reasons (https) in production not development
         sameSite: 'None', // this cookie is sent to all the domains
     })
 
