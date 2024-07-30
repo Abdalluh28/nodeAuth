@@ -3,6 +3,7 @@
 
 const allowedOrigins = [
     'http://localhost:3000',
+    'https://authentication-node-smoky.vercel.app',
 ]
 
 

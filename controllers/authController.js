@@ -58,17 +58,17 @@ const login = async (req, res) => {
     const {email, password} = req.body;
 
     if(!email || !password) {
-        res.status(400).json({'message': 'All fields are required'});
+        return res.status(400).json({'message': 'All fields are required'});
     }
 
     const existingUser = await User.findOne({email}).exec();
     if(!existingUser) {
-        res.status(401).json({'message': 'User does not exist'});
+        return res.status(401).json({'message': 'User does not exist'});
     }
 
     let isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
     if(!isPasswordCorrect) {
-        res.status(401).json({'message': 'Incorrect password'});
+        return res.status(401).json({'message': 'Incorrect password'});
     }
 
     const accessToken = jwt.sign({
@@ -110,7 +110,7 @@ const refresh = (req, res) => {
     const refreshToken = cookies.jwt; 
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, decoded) => {
         if(err) {
-            res.status(403).json({'message': 'Forbidden'}) // refresh token not matches the REFRESH_TOKEN_SECRET
+            return res.status(403).json({'message': 'Forbidden'}) // refresh token not matches the REFRESH_TOKEN_SECRET
         }
 
         const existingUser = await User.findById(decoded.userInfo.id).exec();
@@ -143,7 +143,7 @@ const logout = (req, res) => {
         sameSite: 'None', // this cookie is sent to all the domains
     })
 
-    res.json({'message': 'Cookie cleared'})
+    return res.json({'message': 'Cookie cleared'})
 }
 
 module.exports = {
