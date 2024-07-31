@@ -3,7 +3,7 @@
 
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://mern-auth-ejbtqo3v5-abdalluhs-projects.vercel.app',
+    'https://mernauth-dw3l77kt8-abdalluhs-projects.vercel.app/',
 ]
 
 
