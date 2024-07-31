@@ -3,7 +3,7 @@
 
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://mernauth-dw3l77kt8-abdalluhs-projects.vercel.app/',
+    'https://react-auth-silk.vercel.app',
 ]
 
 
